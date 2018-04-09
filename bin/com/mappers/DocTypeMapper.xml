@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DocTypeDao">
+	
+	<resultMap type="DocType" id="docTypeResult">
+		<id column="id" property="id"/>
+		<result column="typeName" property="typeName"/>
+	</resultMap>
+	
+	<select id="findTypeById" parameterType="Integer" resultMap="docTypeResult">
+	    select * from t_doctype where id=#{doctypeId}
+	</select>
+	
+	<delete id="delete" parameterType="Integer">
+	    delete from t_doctype where id=#{id}
+	</delete>
+	
+	<select id="list" resultMap="docTypeResult" resultType="List">
+	    select * from t_doctype
+	</select>
+	
+	<select id="pag_list" resultMap="docTypeResult" resultType="List" parameterType="Map">
+	    select * from t_doctype limit #{start},#{pageSize}
+	</select>
+	
+	<insert id="addDocType" parameterType="DocType">
+	    insert into t_doctype values(null,#{typeName})
+	</insert>
+	
+	<update id="updateType" parameterType="DocType">
+	    update t_doctype
+	    <set>
+	        <if test="typeName!=null and typeName!='' ">
+				typeName = #{typeName},
+			</if>
+	    </set>
+	    <where>
+	        id = #{id}
+	    </where>
+	</update>
+</mapper> 

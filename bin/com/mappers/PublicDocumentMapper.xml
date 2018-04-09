@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.PublicDocumentDao">
+	
+	<resultMap type="PublicDocument" id="publicDocumentResult">
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="publicDate" property="publicDate"/>
+	</resultMap>
+	
+	<resultMap type="PublicDocument" id="publicDocumentResult2">
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="publicDate" property="publicDate"/>
+	</resultMap>
+	
+	<insert id="add" parameterType="PublicDocument">
+	    insert into t_publicdocument values(null,#{title},#{content},now())
+	</insert>
+	
+	<select id="findNewpd" resultMap="publicDocumentResult" resultType="PublicDocument">
+		select * from t_publicdocument t1 where t1.id=#{id}
+	</select>
+	
+	<select id="list" resultMap="publicDocumentResult">
+	    select * from t_publicdocument
+	</select>
+	
+	<select id="plist" resultMap="publicDocumentResult2" parameterType="Map">
+	    select * from t_publicdocument
+	    <where>
+			<if test="title!=null and title!='' ">
+				title like '%${title}%'
+			</if>
+	    </where>
+	    limit #{start},#{pageSize}
+	</select>
+	
+	<select id="getCount" resultType="Integer" parameterType="Map">
+	    select count(*) from t_publicdocument
+	    <where>
+			<if test="title!=null and title!='' ">
+				title like '%${title}%'
+			</if>
+	    </where>
+	</select>
+	
+	<delete id="delete" parameterType="Integer">
+	    delete from t_publicdocument where id=#{id}
+	</delete>
+	
+	<update id="update" parameterType="PublicDocument">
+	    update t_publicdocument
+	    <set>
+	        <if test="title!=null and title!='' ">
+				title=#{title},
+			</if>
+			<if test="content!=null and content!='' ">
+				content=#{content},
+			</if>
+	    </set>
+	    where id=#{id}
+	</update>
+</mapper> 

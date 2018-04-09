@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.StatusDao">
+	
+    <resultMap type="Status" id="statusResult">
+		<id property="id" column="id"/>
+		<result column="statusName" property="statusName"/>
+    </resultMap>
+    
+	<select id="findById" resultType="Status" resultMap="statusResult" parameterType="Integer">
+	    select * from t_status where id=#{status}
+	</select>
+	
+</mapper> 

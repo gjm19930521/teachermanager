@@ -1,0 +1,145 @@
+/*
+SQLyog 企业版 - MySQL GUI v8.14 
+MySQL - 5.0.27-community-nt : Database - teacherdocumentmansys
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`teacherdocumentmansys` /*!40100 DEFAULT CHARACTER SET gbk */;
+
+USE `teacherdocumentmansys`;
+
+/*Table structure for table `t_doctype` */
+
+DROP TABLE IF EXISTS `t_doctype`;
+
+CREATE TABLE `t_doctype` (
+  `id` int(11) NOT NULL auto_increment,
+  `typeName` varchar(500) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+/*Data for the table `t_doctype` */
+
+insert  into `t_doctype`(`id`,`typeName`) values (1,'文学类'),(2,'历史类'),(3,'数学类'),(4,'语言类'),(5,'计算机类'),(6,'医学类'),(7,'教育类'),(8,'科学类杂志'),(9,'公文');
+
+/*Table structure for table `t_document` */
+
+DROP TABLE IF EXISTS `t_document`;
+
+CREATE TABLE `t_document` (
+  `id` int(11) NOT NULL auto_increment,
+  `oldFileName` varchar(500) default NULL,
+  `newFileName` varchar(500) default NULL,
+  `uploadPath` varchar(100) default NULL,
+  `uploadTime` datetime default NULL,
+  `downloadNum` int(11) default NULL,
+  `s_fileSize` varchar(30) default NULL,
+  `l_fileSize` bigint(20) default NULL,
+  `fileForm` varchar(30) default NULL,
+  `status` int(11) default NULL,
+  `j_status` int(11) default NULL,
+  `userId` int(11) default NULL,
+  `doctypeId` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+/*Data for the table `t_document` */
+
+insert  into `t_document`(`id`,`oldFileName`,`newFileName`,`uploadPath`,`uploadTime`,`downloadNum`,`s_fileSize`,`l_fileSize`,`fileForm`,`status`,`j_status`,`userId`,`doctypeId`) values (1,'文件一1111.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,1,3),(2,'文件二.pdf',NULL,NULL,'2016-04-01 00:00:00',0,'1028',100,'.pdf',1,0,1,2),(3,'文件三.xxs',NULL,NULL,'2016-04-01 00:00:00',0,'65',100,'.xxs',1,0,1,3),(4,'文件四.zip',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.zip',1,0,1,4),(6,'文件六.zip',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.zip',1,0,1,6),(7,'文件七.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',1,1,2,4),(8,'文件八.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,2,3),(9,'文件九.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',1,1,2,2),(10,'文件十一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,2,1),(11,'文件十二.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',1,1,1,1),(12,'文件十三.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,3,2),(13,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,3,2),(14,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,3,3),(15,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,3,1),(16,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,3,5),(17,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,3,1),(18,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,2,4),(19,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,2,1),(20,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,2,4),(21,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,2,1),(22,'文件一.doc',NULL,NULL,'2016-04-01 00:00:00',0,'100',100,'.doc',0,0,2,1),(24,'每日总结.txt','26261210070213568716538500681092237055135672860025_每日总结.txt','admin/2016-04/26261210070213568716538500681092237055135672860025_每日总结.txt','2016-04-03 20:38:13',2,'365 B',365,'.txt',1,0,1,3),(26,'学习安排.txt','31090286704523723159067452633134393648340913481123_学习安排.txt','admin/2016-04/31090286704523723159067452633134393648340913481123_学习安排.txt','2016-04-03 21:46:28',13,'343 B',343,'.txt',0,0,1,1),(37,'java反编译工具.zip','8246017597035976803773443179636539019624873149100_java反编译工具.zip','admin/2016-04/8246017597035976803773443179636539019624873149100_java反编译工具.zip','2016-04-04 17:00:25',2,'770KB',788871,'.zip',1,1,1,2),(38,'取色器.zip','15299102595403398224567912747547183069182431213985_取色器.zip','admin/2016-04/15299102595403398224567912747547183069182431213985_取色器.zip','2016-04-04 17:02:06',6,'145KB',148578,'.zip',1,1,1,1),(40,'光盘使用指南.txt','25969189573708729612406467411107460295396776833215_光盘使用指南.txt','admin/2016-04/25969189573708729612406467411107460295396776833215_光盘使用指南.txt','2016-04-04 19:33:22',0,'842B',842,'.txt',0,0,1,1),(41,'iconfont.zip','5249273414504205096776086113830485716071639369088_iconfont.zip','admin/2016-04/5249273414504205096776086113830485716071639369088_iconfont.zip','2016-04-06 00:16:39',0,'14.5KB',14818,'.zip',0,0,1,2),(42,'工厂网络高清监控系统方案20141026.doc','18420223718659547762941566863907977477906556792599_工厂网络高清监控系统方案20141026.doc','admin/2016-04/18420223718659547762941566863907977477906556792599_工厂网络高清监控系统方案20141026.doc','2016-04-06 14:15:42',0,'663KB',679370,'.doc',0,0,1,2),(43,'工厂网络高清监控系统方案20141026.doc','35144904006151005276589975647229095074528880242051_工厂网络高清监控系统方案20141026.doc','admin/2016-04/35144904006151005276589975647229095074528880242051_工厂网络高清监控系统方案20141026.doc','2016-04-06 14:23:33',1,'663KB',679370,'.doc',0,0,1,2),(44,'工厂网络高清监控系统方案20141026.doc','44166201812238772678242420904305267157503974145413_工厂网络高清监控系统方案20141026.doc','admin/2016-04/44166201812238772678242420904305267157503974145413_工厂网络高清监控系统方案20141026.doc','2016-04-06 14:24:17',5,'663KB',679370,'.doc',0,0,1,2),(45,'竣工图-主车间监控布点IP地址.pdf','15394891976714176095881433935605980881302853073597_竣工图-主车间监控布点IP地址.pdf','admin/2016-04/15394891976714176095881433935605980881302853073597_竣工图-主车间监控布点IP地址.pdf','2016-04-06 20:15:15',4,'342KB',349860,'.pdf',1,1,1,2),(51,'五一放假安排事项.txt','31541045756699488950650895616976810587748020388963_五一放假安排事项.txt','publicDocument/2016-04/31541045756699488950650895616976810587748020388963_五一放假安排事项.txt','2016-04-07 13:15:46',1,'119B',119,'.txt',0,0,1,9),(52,'web 浏览路径选择.txt','32214959106835017689870982412838874526455442738095_web 浏览路径选择.txt','publicDocument/2016-04/32214959106835017689870982412838874526455442738095_web 浏览路径选择.txt','2016-04-07 13:31:51',1,'8.0KB',8242,'.txt',0,0,1,9),(53,'赴日本就业说明书.doc','28662722063551331154704475869217736671803561892231_赴日本就业说明书.doc','publicDocument/2016-04/28662722063551331154704475869217736671803561892231_赴日本就业说明书.doc','2016-04-20 18:28:46',1,'27.0KB',27648,'.doc',0,0,1,9),(54,'赴日本就业说明书.doc','37187694048809011266012357693759738982726979482148_赴日本就业说明书.doc','publicDocument/2016-04/37187694048809011266012357693759738982726979482148_赴日本就业说明书.doc','2016-04-20 18:50:41',0,'27.0KB',27648,'.doc',0,0,1,9),(55,'赴日本就业说明书.doc','34167793331517786496068527344754106390195158512724_赴日本就业说明书.doc','admin/2016-04/34167793331517786496068527344754106390195158512724_赴日本就业说明书.doc','2016-04-20 19:13:04',1,'27.0KB',27648,'.doc',0,0,1,3);
+
+/*Table structure for table `t_identity` */
+
+DROP TABLE IF EXISTS `t_identity`;
+
+CREATE TABLE `t_identity` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(20) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+/*Data for the table `t_identity` */
+
+insert  into `t_identity`(`id`,`name`) values (1,'系统管理员'),(2,'普通教师'),(3,'学生');
+
+/*Table structure for table `t_jstatus` */
+
+DROP TABLE IF EXISTS `t_jstatus`;
+
+CREATE TABLE `t_jstatus` (
+  `id` int(11) NOT NULL auto_increment,
+  `condititon` varchar(20) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+/*Data for the table `t_jstatus` */
+
+insert  into `t_jstatus`(`id`,`condititon`) values (0,'未审核'),(1,'已审核');
+
+/*Table structure for table `t_publicdocument` */
+
+DROP TABLE IF EXISTS `t_publicdocument`;
+
+CREATE TABLE `t_publicdocument` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(100) default NULL,
+  `content` text,
+  `publicDate` date default NULL,
+  `docId` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+/*Data for the table `t_publicdocument` */
+
+insert  into `t_publicdocument`(`id`,`title`,`content`,`publicDate`,`docId`) values (5,'2016年五一放假通知','aaaaaaaaaaaaa','2016-04-07',45),(6,'五一放假安排通知','<p style=\"margin: 0px; padding: 0px 0px; color: rgb(68, 68, 68); font-family: &#39;????&#39;, arial, verdana, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);\">根据国家法定假期的规定，并结合公司实际情况，现对五一节放假做如下安排：</p><p style=\"margin: 0px; padding: 5px 0px; color: rgb(68, 68, 68); font-family: &#39;????&#39;, arial, verdana, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);\"><span style=\"color: rgb(255, 0, 0);\">　　一、放假时间5月1日至3日(星期五至星期天)放假，共3天。与5月2日(周六)、5月3日(周日)连休。</span></p><p style=\"margin: 0px; padding: 5px 0px; color: rgb(68, 68, 68); font-family: &#39;????&#39;, arial, verdana, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);\">　　二、请公司各职员做好自己的节前工作安排，并检查相关设施设备，做好防火防盗工作，确保办公场所的安全、有序。</p><p style=\"margin: 0px; padding: 5px 0px; color: rgb(68, 68, 68); font-family: &#39;????&#39;, arial, verdana, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);\">　　三、公司各职员应保持节假期间的通讯流畅，以便公司工作需要。</p><p style=\"margin: 0px; padding: 5px 0px; color: rgb(68, 68, 68); font-family: &#39;????&#39;, arial, verdana, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);\">　　四、公司有节假日活动行程将另行通知，希望全体员工在节假日外出期间，应注意自身人身安全和财务安全，愉快的度过假期。</p><p style=\"margin: 0px; padding: 5px 0px; color: rgb(68, 68, 68); font-family: &#39;????&#39;, arial, verdana, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);\">　　特此通知!</p><p><br/></p>','2016-04-07',51),(7,'关于做好学生安全工作的报告','<p><span style=\"color: rgb(68, 68, 68); font-family: &#39;????&#39;, arial, verdana, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);\">&nbsp;&nbsp;&nbsp;&nbsp; 1890年5月1日，欧美各国的工人阶级率先走向街头，举行盛大的示威游行与集会，争取合法权益。从此，每逢这一天世界各国的劳动人民都要集会、游行，以示庆祝，并公众放假。中国人民庆祝劳动节的活动可追溯至1918年，一些革命的知识分子在上海、苏州、杭州、汉口等地向群众散发介绍“五一”的传单。新中国成立以后，中央人民政府政务院于1949年12月将5月1日定为法定的劳动节，全国放假一天。</span><br/></p>','2016-04-07',52),(8,'关于做好学生培养健康思想工作的报告','<p>&nbsp;&nbsp;&nbsp; 关于做好学生培养健康思想工作的报告关于做好学生培养健康思想工作的报告关于做好学生培养健康思想工作的报告关于做好学生培养健康思想工作的报告关于做好学生培养健康思想工作的报告</p>','2016-04-20',53),(9,'ad','<p>a<br/></p>','2016-04-20',NULL),(10,'aaaaaaaaa','<p>a<br/></p>','2016-04-20',NULL),(11,'ad','<p>aaaaaaaaaaaaa<br/></p>','2016-04-20',54),(12,'123','<p>123<br/></p>','2016-04-20',NULL),(13,'adad','<p>aa<br/></p>','2016-04-20',NULL);
+
+/*Table structure for table `t_status` */
+
+DROP TABLE IF EXISTS `t_status`;
+
+CREATE TABLE `t_status` (
+  `id` int(11) NOT NULL auto_increment,
+  `statusName` varchar(20) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+/*Data for the table `t_status` */
+
+insert  into `t_status`(`id`,`statusName`) values (0,'私人文件'),(1,'公开文件');
+
+/*Table structure for table `t_user` */
+
+DROP TABLE IF EXISTS `t_user`;
+
+CREATE TABLE `t_user` (
+  `id` int(11) NOT NULL auto_increment,
+  `trueName` varchar(20) default NULL,
+  `sex` varchar(10) default NULL,
+  `nation` varchar(20) default NULL,
+  `birthday` datetime default NULL,
+  `email` varchar(30) default NULL,
+  `mobile` varchar(20) default NULL,
+  `address` varchar(30) default NULL,
+  `dentityCode` varchar(30) default NULL,
+  `userName` varchar(30) default NULL,
+  `passWord` varchar(30) default NULL,
+  `pic` varchar(40) default NULL,
+  `idenId` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+/*Data for the table `t_user` */
+
+insert  into `t_user`(`id`,`trueName`,`sex`,`nation`,`birthday`,`email`,`mobile`,`address`,`dentityCode`,`userName`,`passWord`,`pic`,`idenId`) values (1,'张三1','男','汉族','1994-01-01 00:01:00','731499848@qq.com','123456789','湖北省黄冈市黄州区','421123199401011234','admin','1234',NULL,1),(2,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher','1234',NULL,2),(3,'王五','男','汉族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','jack','1234',NULL,2),(4,'赵六','男','汉族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','tom','1234',NULL,2),(5,'胜七','男','汉族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','marry','1234',NULL,3),(6,'王八','女','汉族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','lucy','1234',NULL,2),(7,'刘九','女','汉族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','kangkang','1234',NULL,2),(8,'张士','男','土家族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','limei','1234',NULL,2),(9,'李三','女','藏族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','xiaofang','1234',NULL,3),(10,'严格','男','汉族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','luxi','1234',NULL,2),(11,'王鑫','女','汉族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','jarry','1234',NULL,2),(12,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher1','1234',NULL,2),(13,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher2','1234',NULL,2),(14,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher3','1234',NULL,2),(15,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher4','1234',NULL,2),(16,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher5','1234',NULL,2),(17,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher6','1234',NULL,2),(18,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher7','1234',NULL,2),(19,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher8','1234',NULL,2),(20,'李四','女','维吾尔族','1994-01-01 00:00:00','1373848398@qq.com','123456789','湖北省天门市天门区','421123199401011234','teacher9','1234',NULL,2),(21,'赵星','男','汉族','2016-01-01 00:03:00','123456789@qq.com','123456789','湖北省十堰市','4211234945768','jaccy','1234',NULL,3);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

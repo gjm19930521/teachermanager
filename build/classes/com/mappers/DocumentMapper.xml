@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DocumentDao">
+	
+	<resultMap type="Document" id="documentResult">
+		<id column="id" property="id"/>
+		<result column="oldFileName" property="oldFileName"/>
+		<result column="newFileName" property="newFileName"/>
+		<result column="status" property="status"/>
+		<result column="j_status" property="j_status"/>
+		<result column="uploadTime" property="uploadTime"/>
+		<result column="downloadNum" property="downloadNum"/>
+		<result column="s_fileSize" property="s_fileSize"/>
+		<result column="l_fileSize" property="l_fileSize"/>
+		<result column="fileForm" property="fileForm"/>
+		<result column="doctypeId" property="doctypeId"/>
+		<result column="userId" property="userId"/>
+		<association property="docType" column="doctypeId" select="com.dao.DocTypeDao.findTypeById"></association>
+		<association property="uploadUser" column="userId" select="com.dao.UserDao.findById"></association>
+		<association property="s" column="status" select="com.dao.StatusDao.findById"></association>
+		<association property="jstatus" column="j_status" select="com.dao.JStatusDao.findById"></association>
+	</resultMap>
+	
+	<select id="findById" parameterType="Integer" resultMap="documentResult">
+	    select * from t_document where id=#{id}
+	</select>
+	
+	<select id="findByTypeId" parameterType="Integer" resultMap="documentResult">
+	    select * from t_document where doctypeId=#{doctypeId} 
+	</select>
+	
+	<select id="list" resultMap="documentResult">
+	    select * from t_document
+	</select>
+	
+	<select id="list_personal" parameterType="Map" resultMap="documentResult">
+	    select * from t_document t1,t_user t2 where t1.userId=t2.id and t2.id=#{id} 
+	   	<if test="fileName!=null and fileName!='' ">
+	        and oldFileName like '%${fileName}%'
+	    </if>
+	</select>
+	
+	<select id="pagin_list" parameterType="Map" resultMap="documentResult">
+	    select * from t_document t1,t_user t2 where t1.userId=t2.id and t2.id=#{id}
+	    <if test="fileName!=null and fileName!='' ">
+	        and oldFileName like '%${fileName}%'
+	    </if>	
+	    limit #{start},#{pageSize}
+	</select>
+	
+	<insert id="addDocument" parameterType="Document">
+	    insert into t_document values(null,#{oldFileName},#{newFileName},#{uploadPath},now(),0,#{s_fileSize},#{l_fileSize},#{fileForm},#{status},0,#{userId},#{doctypeId})
+	</insert>
+	
+	<delete id="deleteDocument" parameterType="Integer">
+	    delete from t_document where id=#{id}
+	</delete>
+	
+	<update id="updateDocument" parameterType="Document">
+	    update t_document
+		<set>
+			<if test="downloadNum!=null and downloadNum!='' ">
+				downloadNum=#{downloadNum},
+			</if>
+			<if test="j_status!=null and j_status!='' ">
+				j_status=#{j_status},
+			</if>
+			<if test="oldFileName!=null and oldFileName!='' ">
+				oldFileName=#{oldFileName},
+			</if>
+			<if test="doctypeId!=null and doctypeId!='' ">
+				doctypeId=#{doctypeId},
+			</if>
+			<if test="status!=null and status!='' ">
+				status=#{status},
+			</if>
+		</set>
+	    <where>
+	        id=#{id}
+	    </where>
+	</update>
+	
+	<update id="updateDocument2" parameterType="Document">
+	    update t_document 
+		<set>
+			<if test="oldFileName!=null and oldFileName!='' ">
+				oldFileName=#{oldFileName},
+			</if>
+			<if test="doctypeId!=null and doctypeId!='' ">
+				doctypeId=#{doctypeId},
+			</if>
+			status=#{status}
+		</set>
+	    <where>
+	        id=#{id}
+	    </where>
+	</update>
+	
+	<select id="list_fileSize" resultMap="documentResult">
+	    select l_fileSize from t_document where userId=#{id} and status=0
+	</select>
+	
+	<select id="list_public" resultMap="documentResult">
+	    select * from t_document t1,t_user t2 where t1.userId=t2.id and t1.status=1 and t1.j_status=1
+	    <if test="fileName!=null and fileName!='' ">
+	        and oldFileName like '%${fileName}%'
+	    </if>
+	</select>
+	
+	<select id="pagin_list_public" parameterType="Map" resultMap="documentResult">
+	    select * from t_document t1,t_user t2 where t1.userId=t2.id and t1.status=1 and t1.j_status=1 
+	   	<if test="fileName!=null and fileName!='' ">
+	        and oldFileName like '%${fileName}%'
+	    </if>
+	   	limit #{start},#{pageSize}
+	</select>
+	
+	<select id="list_public_j" resultMap="documentResult">
+	    select * from t_document t1,t_user t2 where t1.userId=t2.id and t1.status=1 and t1.j_status=0
+	</select>
+	
+	<select id="pagin_list_public_j" parameterType="Map" resultMap="documentResult">
+	    select * from t_document t1,t_user t2 where t1.userId=t2.id and t1.status=1 and t1.j_status=0 limit #{start},#{pageSize}
+	</select>
+	
+</mapper> 
